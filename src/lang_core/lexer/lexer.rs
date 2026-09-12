@@ -59,6 +59,14 @@ pub fn lex(input: String, file_path: String) -> Result<Vec<Token>, PFPError> {
                 });
                 i = end + 1;
             }
+            ',' => {
+                tokens.push(Token {
+                    kind: TokT::COMMA,
+                    val: ch.to_string(),
+                    span: Span::new(file_path.clone(), line, i as u32, i as u32, ch.to_string()),
+                });
+                i += 1;
+            }
             '+' | '-' | '*' | '/' => {
                 tokens.push(Token {
                     kind: TokT::OP,
